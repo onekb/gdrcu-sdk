@@ -1,0 +1,20 @@
+{
+    "name": "onekb/gdrcu",
+    "description": "广东农信统一支付平台",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "onekb",
+            "email": "1@1kb.ren"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.3",
+        "pimple/pimple": "^3.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Onekb\\Gdrcu\\": "src"
+        }
+    }
+}
