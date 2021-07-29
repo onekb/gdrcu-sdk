@@ -1,14 +1,28 @@
 <?php
 
+/*
+ * This file is part of the onekb/gdrcu.
+ *
+ * (c) onekb <1@1kb.ren>
+ *
+ * This source file is subject to the MIT license that is bundled.
+ */
+
 namespace Onekb\Gdrcu\Kernel;
 
 use GuzzleHttp\Psr7\Response as GuzzleResponse;
 use Onekb\Gdrcu\Kernel\Support\Collection;
-use Psr\Http\Message\ResponseInterface;
 use Onekb\Gdrcu\Kernel\Support\XML;
+use Psr\Http\Message\ResponseInterface;
 
 class Response extends GuzzleResponse
 {
+    final public function __construct()
+    {
+        $args = func_get_args();
+        parent::__construct(...$args);
+    }
+
     /**
      * @return string
      */
@@ -22,8 +36,6 @@ class Response extends GuzzleResponse
     }
 
     /**
-     * @param \Psr\Http\Message\ResponseInterface $response
-     *
      * @return \EasyWeChat\Kernel\Http\Response
      */
     public static function buildFromPsrResponse(ResponseInterface $response)
@@ -96,8 +108,6 @@ class Response extends GuzzleResponse
     }
 
     /**
-     * @param string $content
-     *
      * @return string
      */
     protected function removeControlCharacters(string $content)

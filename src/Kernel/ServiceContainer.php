@@ -1,5 +1,13 @@
 <?php
 
+/*
+ * This file is part of the onekb/gdrcu.
+ *
+ * (c) onekb <1@1kb.ren>
+ *
+ * This source file is subject to the MIT license that is bundled.
+ */
+
 namespace Onekb\Gdrcu\Kernel;
 
 use Onekb\Gdrcu\Kernel\Providers\ConfigServiceProvider;
@@ -16,7 +24,6 @@ class ServiceContainer extends Container
     protected $defaultConfig = [];
 
     protected $userConfig = [];
-
 
     public function __construct(array $config = [], array $prepends = [], string $id = null)
     {
@@ -50,12 +57,14 @@ class ServiceContainer extends Container
             HttpServiceProvider::class,
             SignServiceProvider::class,
         ];
+
         return array_merge($base, $this->providers);
     }
 
     public function getConfig()
     {
         $base = [];
+
         return array_replace_recursive($base, $this->defaultConfig, $this->userConfig);
     }
 

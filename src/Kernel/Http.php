@@ -1,12 +1,20 @@
 <?php
 
+/*
+ * This file is part of the onekb/gdrcu.
+ *
+ * (c) onekb <1@1kb.ren>
+ *
+ * This source file is subject to the MIT license that is bundled.
+ */
+
 namespace Onekb\Gdrcu\Kernel;
 
-use Onekb\Gdrcu\Contracts\HttpInterface;
-use Onekb\Gdrcu\Kernel\Response;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
+use Onekb\Gdrcu\Contracts\HttpInterface;
 use Onekb\Gdrcu\Exceptions\InvalidConfigException;
+use Onekb\Gdrcu\Kernel\Contracts\Arrayable;
 use Psr\Http\Message\ResponseInterface;
 
 class Http implements HttpInterface
@@ -16,7 +24,7 @@ class Http implements HttpInterface
      */
     protected $app;
 
-    protected $host = "";
+    protected $host = '';
 
     protected ClientInterface $client;
 
@@ -32,8 +40,9 @@ class Http implements HttpInterface
     protected function getClient(): ClientInterface
     {
         $config = [
-            'base_uri' => $this->host
+            'base_uri' => $this->host,
         ];
+
         return new Client($config);
     }
 
@@ -45,7 +54,7 @@ class Http implements HttpInterface
     public function post(string $path, array $data)
     {
         $options = [
-            'json' => $data
+            'json' => $data,
         ];
         // return $this->client->request('POST', $path, $options);
         return $this->request($path, 'post', $options);
@@ -54,16 +63,18 @@ class Http implements HttpInterface
     public function put(string $path, array $data)
     {
         $options = [
-            'json' => $data
+            'json' => $data,
         ];
+
         return $this->client->request('PUT', $path, $options);
     }
 
     public function delete(string $path, array $data = [])
     {
         $options = [
-            'json' => $data
+            'json' => $data,
         ];
+
         return $this->client->request('GET', $path, $options);
     }
 

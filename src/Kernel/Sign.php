@@ -1,12 +1,17 @@
 <?php
 
-namespace Onekb\Gdrcu\Kernel;
+/*
+ * This file is part of the onekb/gdrcu.
+ *
+ * (c) onekb <1@1kb.ren>
+ *
+ * This source file is subject to the MIT license that is bundled.
+ */
 
-use Onekb\Gdrcu\Kernel\Config;
+namespace Onekb\Gdrcu\Kernel;
 
 class Sign
 {
-
     protected $app;
 
     protected Config $config;
@@ -27,12 +32,9 @@ class Sign
             'body' => $body,
         ];
 
+        $string = json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
-
-        $string  = json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-
-        $priKey =  openssl_pkey_get_private($this->config->get('priRsaKey'));
-
+        $priKey = openssl_pkey_get_private($this->config->get('priRsaKey'));
 
         $signature = '';
         openssl_sign($string, $signature, $priKey, 'MD5');
@@ -55,7 +57,6 @@ class Sign
             'body' => $body,
         ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
-
         $oriStr = str_replace('\\"', '"', $oriStr);
         $posA = strpos($oriStr, '"body":"');
         $posB = strpos($oriStr, '"}', $posA);
@@ -66,6 +67,6 @@ class Sign
 
         $pubKey = openssl_pkey_get_public($this->config->get('xthPubRsaKey'));
 
-        return (bool)openssl_verify($string, $signature, $pubKey, "MD5");
+        return (bool) openssl_verify($string, $signature, $pubKey, 'MD5');
     }
 }

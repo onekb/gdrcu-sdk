@@ -1,16 +1,22 @@
 <?php
 
+/*
+ * This file is part of the onekb/gdrcu.
+ *
+ * (c) onekb <1@1kb.ren>
+ *
+ * This source file is subject to the MIT license that is bundled.
+ */
+
 namespace Onekb\Gdrcu\Powers\Order;
 
 use Onekb\Gdrcu\Powers\Kernel\BaseClient;
-use PDO;
 
 class Client extends BaseClient
 {
     /**
-     * 二维码下单
+     * 二维码下单.
      *
-     * @param array $params
      * @return void
      */
     public function getQrCode(array $params)
@@ -32,7 +38,7 @@ class Client extends BaseClient
             'origCstTxnTm' => $time, // 源客户端系统交易时间
             // 'signatureFlag' => 'true', // 是否数字签名（貌似非必填）
         ];
-        $head = $this->app->array_default_merge($head, $params);
+        $head = array_default_merge($head, $params);
 
         $body = [
             'outTradeNo' => '', // 外部商户订单号
@@ -45,24 +51,22 @@ class Client extends BaseClient
             // 'validTime' => '3', //二维码有效期 默认三分钟 单位分钟
         ];
 
-        $body = $this->app->array_default_merge($body, $params);
-
+        $body = array_default_merge($body, $params);
 
         $body = [
             'service' => [
                 'version' => '2.0',
                 'head' => $head,
-                'body' => $body
-            ]
+                'body' => $body,
+            ],
         ];
 
         return $this->app->http->post('/merchantFront/getQrCode', $body);
     }
 
     /**
-     * 订单查询
+     * 订单查询.
      *
-     * @param array $params
      * @return void
      */
     public function inspOrder(array $params)
@@ -81,30 +85,29 @@ class Client extends BaseClient
             'origCstTxnDt' => $date, //源客户端系统交易日期
             'origCstTxnTm' => $time, //源客户端系统交易时间
         ];
-        $head = $this->app->array_default_merge($head, $params);
+        $head = array_default_merge($head, $params);
 
         $body = [
             'payOrdNo' => '',
             'outTradeNo' => '',
         ];
 
-        $body = $this->app->array_default_merge($body, $params);
+        $body = array_default_merge($body, $params);
 
         $body = [
             'service' => [
                 'version' => '2.0',
                 'head' => $head,
-                'body' => $body
-            ]
+                'body' => $body,
+            ],
         ];
 
         return $this->app->http->post('/merchantFront/inspOrder', $body);
     }
 
     /**
-     * 申请退款
+     * 申请退款.
      *
-     * @param array $params
      * @return void
      */
     public function refund(array $params)
@@ -124,7 +127,7 @@ class Client extends BaseClient
             'origCstTxnTm' => $time, //源客户端系统交易时间
         ];
 
-        $head = $this->app->array_default_merge($head, $params);
+        $head = array_default_merge($head, $params);
 
         $body = [
             'outTradeNo' => '',
@@ -134,23 +137,22 @@ class Client extends BaseClient
             'refundCause' => '',
         ];
 
-        $body = $this->app->array_default_merge($body, $params);
+        $body = array_default_merge($body, $params);
 
         $body = [
             'service' => [
                 'version' => '2.0',
                 'head' => $head,
-                'body' => $body
-            ]
+                'body' => $body,
+            ],
         ];
 
         return $this->app->http->post('/merchantFront/refund', $body);
     }
 
     /**
-     * 退款查询
+     * 退款查询.
      *
-     * @param array $params
      * @return void
      */
     public function qryRefund(array $params)
@@ -170,7 +172,7 @@ class Client extends BaseClient
             'origCstTxnTm' => $time, //源客户端系统交易时间
         ];
 
-        $head = $this->app->array_default_merge($head, $params);
+        $head = array_default_merge($head, $params);
 
         $body = [
             'refundOrdNo' => '',
@@ -178,14 +180,14 @@ class Client extends BaseClient
             'mercId' => $config->get('mercId'),
         ];
 
-        $body = $this->app->array_default_merge($body, $params);
+        $body = array_default_merge($body, $params);
 
         $body = [
             'service' => [
                 'version' => '2.0',
                 'head' => $head,
-                'body' => $body
-            ]
+                'body' => $body,
+            ],
         ];
 
         return $this->app->http->post('/merchantFront/qryRefund', $body);

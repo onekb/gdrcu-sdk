@@ -1,8 +1,14 @@
 <?php
 
-namespace Onekb\Gdrcu;
+/*
+ * This file is part of the onekb/gdrcu.
+ *
+ * (c) onekb <1@1kb.ren>
+ *
+ * This source file is subject to the MIT license that is bundled.
+ */
 
-use Onekb\Gdrcu\Application;
+namespace Onekb\Gdrcu;
 
 class Factory
 {

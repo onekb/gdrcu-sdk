@@ -1,5 +1,13 @@
 <?php
 
+/*
+ * This file is part of the onekb/gdrcu.
+ *
+ * (c) onekb <1@1kb.ren>
+ *
+ * This source file is subject to the MIT license that is bundled.
+ */
+
 namespace Onekb\Gdrcu\Kernel\Support;
 
 use ArrayAccess;
@@ -14,7 +22,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
 {
     protected array $items = [];
 
-    public function __construct(array $items = [])
+    final public function __construct(array $items = [])
     {
         foreach ($items as $key => $value) {
             $this->set($key, $value);
@@ -161,6 +169,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
     public static function __set_state(array $properties)
     {
         $class = new static($properties);
+
         return $class->all();
     }
 
