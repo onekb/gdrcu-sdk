@@ -28,7 +28,7 @@ $app = \Onekb\Gdrcu\Factory::Gdrcu([
 // 二维码下单
 $a = $app->order->getQrCode([
     'outTradeNo' => substr(md5(time()), 0, 10), // 单号
-    'fee' => 0.01, // 金额
+    'payOrderAmount' => 0.01, // 金额
     'remark' => '测试支付' //备注
 ]);
 

@@ -15,6 +15,13 @@ use Onekb\Gdrcu\Kernel\Providers\HttpServiceProvider;
 use Onekb\Gdrcu\Kernel\Providers\SignServiceProvider;
 use Pimple\Container;
 
+/**
+ * Class ServiceContainer.
+ *
+ * @property \Onekb\Gdrcu\Kernel\Config $config
+ * @property \Onekb\Gdrcu\Kernel\Http   $http
+ * @property \Onekb\Gdrcu\Kernel\Sign   $sign
+ */
 class ServiceContainer extends Container
 {
     protected $id = '';

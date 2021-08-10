@@ -36,7 +36,7 @@ class Response extends GuzzleResponse
     }
 
     /**
-     * @return \EasyWeChat\Kernel\Http\Response
+     * @return \Onekb\Gdrcu\Kernel\Response
      */
     public static function buildFromPsrResponse(ResponseInterface $response)
     {
@@ -84,7 +84,7 @@ class Response extends GuzzleResponse
     /**
      * Get collection data.
      *
-     * @return \EasyWeChat\Kernel\Support\Collection
+     * @return \Onekb\Gdrcu\Kernel\Support\Collection
      */
     public function toCollection()
     {

@@ -13,6 +13,11 @@ namespace Onekb\Gdrcu;
 use Onekb\Gdrcu\Kernel\ServiceContainer;
 use Onekb\Gdrcu\Powers\Order\OrderServiceProvider;
 
+/**
+ * Class Application.
+ *
+ * @property \Onekb\Gdrcu\Powers\Order\Client $order
+ */
 class Application extends ServiceContainer
 {
     protected $providers = [
