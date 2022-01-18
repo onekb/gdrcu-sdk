@@ -2,7 +2,6 @@
 
 <p align="center"> 广东农信统一支付平台SDK（非官方）</p>
 
-
 ## Installing
 
 ```shell
@@ -12,6 +11,7 @@ $ composer require onekb/gdrcu -vvv
 ## Usage
 
 1. 初始化配置Gdrcu
+
 ```php
 $app = \Onekb\Gdrcu\Factory::Gdrcu([
     'host' => 'https://pay.xxx.com', // 请联系你的客户经理获取正式平台地址
@@ -20,10 +20,14 @@ $app = \Onekb\Gdrcu\Factory::Gdrcu([
     'priRsaKey' => $priRsaKey, // 私钥 请联系你的客户经理获取
     'xthPubRsaKey' => $xthPubRsaKey, // 鲜特汇公钥 请联系你的客户经理获取
     'mercId' => $mercId, // 商户号 请联系你的客户经理获取
+    'timeout' => 5, // Guzzle超时时间
+    'connect_timeout' => 5, // Guzzle链接超时时间
+
 ]);
 ```
 
 2. 使用功能
+
 ```php
 // 二维码下单
 $a = $app->order->getQrCode([
@@ -61,7 +65,8 @@ You can contribute in one of three ways:
 2. Answer questions or fix bugs on the [issue tracker](https://github.com/onekb/gdrcu/issues).
 3. Contribute new features or update the wiki.
 
-_The code contribution process is not very formal. You just need to make sure that you follow the PSR-0, PSR-1, and PSR-2 coding guidelines. Any new code contributions must be accompanied by unit tests where applicable._
+_The code contribution process is not very formal. You just need to make sure that you follow the PSR-0, PSR-1, and
+PSR-2 coding guidelines. Any new code contributions must be accompanied by unit tests where applicable._
 
 ## License
 

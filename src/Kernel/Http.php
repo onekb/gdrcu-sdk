@@ -25,6 +25,8 @@ class Http implements HttpInterface
     protected $app;
 
     protected $host = '';
+    protected $timeout = '';
+    protected $connectTimeout = '';
 
     protected ClientInterface $client;
 
@@ -33,6 +35,8 @@ class Http implements HttpInterface
         $this->app = $app;
 
         $this->host = $this->app->config->get('host');
+        $this->timeout = $this->app->config->get('timeout', 5);
+        $this->connectTimeout = $this->app->config->get('connect_timeout', 5);
 
         $this->client = $this->getClient();
     }
@@ -41,6 +45,8 @@ class Http implements HttpInterface
     {
         $config = [
             'base_uri' => $this->host,
+            'timeout' => $this->timeout,
+            'connect_timeout' => $this->connectTimeout,
         ];
 
         return new Client($config);
@@ -57,6 +63,8 @@ class Http implements HttpInterface
             'json' => $data,
         ];
         // return $this->client->request('POST', $path, $options);
+        var_dump([$path, 'post', $options]);
+
         return $this->request($path, 'post', $options);
     }
 
@@ -90,7 +98,10 @@ class Http implements HttpInterface
 
         $response = $this->client->request($method, $path, $options);
 
-        return $this->castResponseToType($response, $this->app->config->get('response_type', 'raw'));
+        return $this->castResponseToType(
+            $response,
+            $this->app->config->get('response_type', 'raw')
+        );
     }
 
     protected function castResponseToType(ResponseInterface $response, $type = null)
